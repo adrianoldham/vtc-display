@@ -4,7 +4,7 @@
 <div id="body_<:article id:>" class="body">
 <:body:>
 </div><:or Or:><:eif Or:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
-<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "L"]:><:case Allkids:><:include include/sortallkids.tmpl:>
+<:movestepkid:><:embed allkid:><:iterator end allkids:><:case Or [cfg basic hide_child_list] [ifMatch [article flags] "l"]:><:case Allkids:><:include include/sortallkids.tmpl:>
 <div id="children_<:article id:>" class="children">
   <ul><:iterator begin allkids:>
     <li<:ifAllkid thumbImage:> class="thumbnail"<:or:><:eif:>><:ifAllkid thumbImage:>
@@ -20,7 +20,7 @@
   <ul><:iterator begin stepparents:>
     <li><a href="<:url stepparent:>"><:stepparent title:></a></li><:iterator end stepparents:>
   </ul>
-</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "H"]:><:or Or:>
+</div><:or Stepparents:><:eif Stepparents:><:eif Or:><:if Files:><:if Or [cfg basic hide_file_list] [ifMatch [article flags] "h"]:><:or Or:>
 <:include include/files.tmpl:><:eif Or:><:or Files:><:eif Files:>
 </div>
 <!-- END ID: <:article id:> - TEMP: <:article template:> -->
