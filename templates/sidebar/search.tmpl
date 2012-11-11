@@ -1,7 +1,7 @@
 <:wrap base.tmpl:><:embed start:>
 <!-- START ID: <:article id:> - TEMP: <:article template:> --><:if Embedded:><:admin article_mini:><:or Embedded:><:admin:><:eif Embedded:>
 <div id="search_menu">
-  <form id="search_menu_form" method="get" action="/cgi-bin/search.pl">
+  <form id="search_menu_form" method="get" action="<:target search:>">
     <fieldset>
       <label for="search_menu_query"><:article title:></label>
       <input type="text" id="search_menu_query" name="q" size="20" title="Enter search terms" value="Enter search terms" />

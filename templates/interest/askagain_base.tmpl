@@ -1,5 +1,5 @@
 <:wrap base.tmpl:>
-<form method="post" action="/cgi-bin/interest.pl">
+<form method="post" action="<:target interest:>">
 <:ifCgi product:><input type="hidden" name="product" value="<:cgi product |h:>"><:or:><:eif:>
 <:ifCgi product_id:><input type="hidden" name="product_id" value="<:cgi product_id |h:>"><:or:><:eif:>
 <div align="center">

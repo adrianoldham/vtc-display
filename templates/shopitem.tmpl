@@ -5,7 +5,7 @@
 <h1 id="title_<:article id:>" class="embedtitle"><:article title:></h1><:case default:>
 <h1 id="title_<:article id:>" class="pagetitle"><:title:></h1><:endswitch:><:if Product retailPrice:>
 <div class="buynow">
-<form id="add_form_<:article id:>" action="/cgi-bin/shop.pl" method="post">
+<form id="add_form_<:article id:>" action="<:target shop:>" method="post">
   <input type="hidden" name="id" value="<:product id:>" />
   <input type="hidden" name="r" value="<:url top:>" /><:if Options:>
   <table>
@@ -27,7 +27,7 @@
 </form>
 </div><:or Product:>
 <div class="price">
-  <form name="notifyme" method="post" action="/cgi-bin/interest.pl">
+  <form name="notifyme" method="post" action="<:target interest:>">
     <b>Coming soon!</b> <input type="hidden" name="product" value="<:product title:>" />
     <p>To register your interest in this product and receive notification when it becomes available, please enter and submit your email address below.</p>
     <b>Email:</b> <input type="text" name="email" size="40" /> <input type="submit" name="Submit" value="Register my interest" />

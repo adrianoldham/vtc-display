@@ -15,7 +15,7 @@
         <p class="s_pagetitle"><span>Page title:</span> <:pageTitle:></p><:or PageTitle:><:eif PageTitle:><:if Product_code:>
         <p class="s_pcode"><span>Product code:</span> <:product_code:></p><:or Product_code:><:eif Product_code:><:if Matchfiles:>
         <:iterator begin matchfiles:><div class="s_file">
-          <p class="s_description"><span>File description:</span> <:if Or [ifUser] [ifEq [matchfile requireUser] "0"]:><a href="/cgi-bin/user.pl?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:>"><:matchfile description:></a><:or Or:><:matchfile description:><:eif Or:> <span class="s_size">[<:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB]</span></p>
+          <p class="s_description"><span>File description:</span> <:if Or [ifUser] [ifEq [matchfile requireUser] "0"]:><a href="<:target user:>?download_file=1&amp;file=<:matchfile id:>" title="Uploaded: <:date matchfile whenUploaded:>"><:matchfile description:></a><:or Or:><:matchfile description:><:eif Or:> <span class="s_size">[<:arithmetic d1:( [matchfile sizeInBytes] / 1024):>KB]</span></p>
           <:if Matchfile displayName_matched:><p class="s_filename"><span>File name:</span> <:matchfile displayName:></p>
           <:or Matchfile:><:eif Matchfile:><:if Matchfile notes_matched:><p class="s_notes"><span>File notes:</span> <:matchfile notes_excerpt:></p><:or Matchfile:><:eif Matchfile:>
         </div><:iterator end matchfiles:><:or Matchfiles:><:eif Matchfiles:>

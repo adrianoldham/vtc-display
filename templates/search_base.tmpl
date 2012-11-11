@@ -1,7 +1,7 @@
 <:wrap base.tmpl title=>"Search" :>
 <div id="search" class="article search">
 <h1 class="pagetitle"><:param title |h:></h1>
-<form id="search_form" method="post" action="/cgi-bin/search.pl">
+<form id="search_form" method="post" action="<:target search:>">
   <input type="hidden" name="admin" value="<:admin_search:>" />
   <table>
     <tr>

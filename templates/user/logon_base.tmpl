@@ -52,9 +52,9 @@
        <table width="100%" border="0" cellspacing="0" cellpadding="0">
          <tr> 
            <td align="left" nowrap="nowrap"><br />
-            <a href="/cgi-bin/user.pl?show_lost_password=1">Lost your password?</a></td>
+            <a href="<:target user:>?show_lost_password=1">Lost your password?</a></td>
           <:if Cfg "site users" user_register 1:><td align="right" nowrap="nowrap"><br />
-            <a href="/cgi-bin/user.pl?show_register=1<:ifCgi r:>&amp;r=<:cgi r |u:><:or:><:eif:>">Not yet registered?</a></td><:or Cfg:><:eif Cfg:>
+            <a href="<:target user:>?show_register=1<:ifCgi r:>&amp;r=<:cgi r |u:><:or:><:eif:>">Not yet registered?</a></td><:or Cfg:><:eif Cfg:>
         </tr>
       </table>
     </td>

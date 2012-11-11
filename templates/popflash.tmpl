@@ -1,6 +1,6 @@
 <div class="popflash">
 <:iterator begin files:><:if And [ifEq [file download] "0"] [ifMatch [file name] "_popflash"]:><div>
-  <a href="/cgi-bin/user.pl?download_file=1&amp;file=<:file id:>" onclick="return bse_popup_file(<:file id:>, <:cfg popflash width 440:>, <:cfg popflash height 320:>);" title="<:file description:>" target="bse_file"><:if Imagen [file name]:><:imagen [file name]:><:or Imagen:><:file displayName:><:eif Imagen:></a>
+  <a href="<:target user:>?download_file=1&amp;file=<:file id:>" onclick="return bse_popup_file(<:file id:>, <:cfg popflash width 440:>, <:cfg popflash height 320:>);" title="<:file description:>" target="bse_file"><:if Imagen [file name]:><:imagen [file name]:><:or Imagen:><:file displayName:><:eif Imagen:></a>
 <:ifAnd [cfg popflash caption "1"] [file description]:>  <p><:file description:></p>
 <:or:><:eif:></div>
 <:or And:><:eif And:><:iterator end files:>
@@ -25,9 +25,9 @@ function init_bse_popup_file(init_extrawidth, init_extraheight, init_popmiddle, 
 }
 
 function bse_popup_file(file_id, width, height) {
-  //var url = "/cgi-bin/user.pl?download_file=1&file=" + file_id;
+  //var url = "<:target user:>?download_file=1&file=" + file_id;
   // the flash video player doesn't like the normal BSE file download url, so we need to setup an Apache Rewrite Rule
-  // RewriteRule /video/([0-9]+) /cgi-bin/user.pl?download_file=1&file=$1 [PT]
+  // RewriteRule /video/([0-9]+) <:target user:>?download_file=1&file=$1 [PT]
   var url = "/video/" + file_id;
   var work_width = width + extrawidth;
   var work_height = height + extraheight;

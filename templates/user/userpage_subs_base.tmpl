@@ -10,7 +10,7 @@
 </table>
 <:include include/usermessage.tmpl:>
 <:if Subscriptions:>
-<form action="/cgi-bin/user.pl" method="post">
+<form action="<:target user:>" method="post">
 <input type="hidden" name="_t" value="subs" />
 <table border="0" cellpadding="1" cellspacing="1">
   <tr>

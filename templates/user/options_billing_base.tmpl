@@ -10,7 +10,7 @@
 </table><:if Partial_logon:>
 <p>When your account was created, not all of the required details were entered.  Please provide at least the fields marked as required to complete your account activation.</p><:or Partial_logon:>
 <:include include/usermessage.tmpl:><:eif Partial_logon:>
-<form action="/cgi-bin/user.pl" method="post">
+<form action="<:target user:>" method="post">
 <:if Cfg "site users" nopassword:>
 <input type="hidden" name="u" value="<:user id:>" />
 <input type="hidden" name="p" value="<:user password:>" />

@@ -9,7 +9,7 @@
   </tr>
 </table>
 <:include include/usermessage.tmpl:>
-<form action="/cgi-bin/user.pl" method="post" enctype="multipart/form-data">
+<form action="<:target user:>" method="post" enctype="multipart/form-data">
 <:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+affiliate+details+saved+successfully" /><:eif Cgi:>
 <input type="hidden" name="_t" value="affiliate" />
 <table border="0" cellpadding="1" cellspacing="1">

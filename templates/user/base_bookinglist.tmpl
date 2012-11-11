@@ -11,7 +11,7 @@
 <div id="user">
 <:include include/usermessage.tmpl:>
 <:if Bookings:>
-<form action="/cgi-bin/user.pl" method="post">
+<form action="<:target user:>" method="post">
 <table border="0" cellspacing="1" cellpadding="2">
   <tr> 
     <th width="50%">Seminar</th>
@@ -22,7 +22,7 @@
   </tr>
 <:iterator begin bookings:><tr> 
     <td><a href="<:booking link:>"><:booking title:></a></td>
-    <td><a href="/cgi-bin/shop.pl?a_location=1&amp;location_id=<:booking location_id:>" onclick="return show_location(<:booking location_id:>)"><:booking loc_description:></a></td>
+    <td><a href="<:target shop:>?a_location=1&amp;location_id=<:booking location_id:>" onclick="return show_location(<:booking location_id:>)"><:booking loc_description:></a></td>
     <td nowrap="nowrap"><:date "%I:%M %p" booking when_at:></td>
     <td nowrap="nowrap"><:date booking when_at:></td>
     <td nowrap="nowrap">
@@ -39,7 +39,7 @@
 <script type="text/javascript" language="javascript">
 //<![CDATA[
 function show_location(locationid) {
-  window.open('/cgi-bin/shop.pl?a_location=1&amp;location_id='+locationid, 
+  window.open('<:target shop:>?a_location=1&amp;location_id='+locationid, 
               'location', 
               'width=600,height=300,location=no,status=no,menubar=no,scrollbars=yes');
   return false;

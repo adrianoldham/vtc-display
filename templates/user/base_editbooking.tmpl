@@ -1,7 +1,7 @@
 <:wrap user/userbase.tmpl title=>"Edit Seminar Booking":>
 <:include include/usermessage.tmpl:>
 <h2><:seminar title:></h2>
-<form action="/cgi-bin/nuser.pl/user/savebooking" method="post"><:ifCgi r:>
+<form action="<:target nuser:>/user/savebooking" method="post"><:ifCgi r:>
 <input type="hidden" name="r" value="<:cgi r:>" /><:or:><:eif:>
 <div class="sessions">
   <h2>Sessions</h2>              

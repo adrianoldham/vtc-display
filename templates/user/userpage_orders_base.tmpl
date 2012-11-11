@@ -71,8 +71,8 @@
 <:iterator begin orderfiles:> 
   <tr> 
     <td><:orderfile description:></td>
-    <td><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:orderfile displayName:></a><:or FileAvail:><:orderfile displayName:><:eif FileAvail:></td>
-    <td><:if FileAvail:><a href="/cgi-bin/user.pl?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:ifOrderfile download:><img src="/images/<:cfg theme name:>filestatus/download.gif" width="15" height="15" alt="Download now" title="Download now" border="0" /><:or:><img src="/images/<:cfg theme name:>filestatus/load.gif" width="15" height="15" alt="Load in browser" title="Load in browser" border="0" /><:eif:></a><:or FileAvail:><img src="/images/filestatus/locked.gif" width="15" height="15" alt="Locked" title="Locked" /><:eif FileAvail:></td>
+    <td><:if FileAvail:><a href="<:target user:>?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:orderfile displayName:></a><:or FileAvail:><:orderfile displayName:><:eif FileAvail:></td>
+    <td><:if FileAvail:><a href="<:target user:>?download=1&amp;file=<:orderfile id:>&amp;order=<:order id:>&amp;item=<:orderfile item_id:>"><:ifOrderfile download:><img src="/images/<:cfg theme name:>filestatus/download.gif" width="15" height="15" alt="Download now" title="Download now" border="0" /><:or:><img src="/images/<:cfg theme name:>filestatus/load.gif" width="15" height="15" alt="Load in browser" title="Load in browser" border="0" /><:eif:></a><:or FileAvail:><img src="/images/filestatus/locked.gif" width="15" height="15" alt="Locked" title="Locked" /><:eif FileAvail:></td>
     <td><:kb orderfile sizeInBytes:></td>
   </tr>
 <:iterator end orderfiles:> 
