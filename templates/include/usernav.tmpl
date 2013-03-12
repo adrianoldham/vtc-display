@@ -36,7 +36,7 @@
   <:if Cfg "site users" nopassword:><:or Cfg:>
     <th align="left" nowrap="nowrap"><a href="<:target user:>?show_opts=<:ifCfg "site users" nopassword 0:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>"><img src="/images/<:cfg theme name:>user/user_sml.gif" width="19" height="19" border="0" title="Your contact details" alt="Your contact details" /></a></th>
     <:ifCfg shop enabled:>
-    <th align="left" nowrap="nowrap"><a href="<:target user:>?show_opts=1&amp;_t=billing"><img src="/images/<:cfg theme name:>user/card_sml.gif" width="19" height="19" border="0" title="Your billing details" alt="Your billing details" /></a></th>
+    <th align="left" nowrap="nowrap"><a href="<:target user:>?show_opts=1&amp;_t=delivery"><img src="/images/<:cfg theme name:>user/card_sml.gif" width="19" height="19" border="0" title="Your shipping details" alt="Your shipping details" /></a></th>
     <:or:><:eif:>
   <:eif Cfg:>
     <:ifCfg shop enabled:>

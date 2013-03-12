@@ -18,106 +18,111 @@
 <:or Cfg:><:if Cgi r:><input type="hidden" name="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" value="<:script:>?userpage=1&amp;message=User+contact+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
 <table border="0" cellpadding="1" cellspacing="1">
   <tr>
-    <th nowrap="nowrap" align="left">First Name:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_name1 "First Name":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="name1" value="<:last name1:>" size="40" maxlength="127" tabindex="1" /><:ifRequired name1:>*<:or:><:eif:></td>
+      <input type="text" name="name1" value="<:old name1 user name1:>" size="40" maxlength="127" /><:ifRequired name1:>*<:or:><:eif:></td>
     <td nowrap="nowrap"><:error_img name1:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Last Name:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_name2 "Last Name":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="name2" value="<:last name2:>" size="40" maxlength="127" tabindex="2" /><:ifRequired name2:>*<:or:><:eif:>
+      <input type="text" name="name2" value="<:old name2 user name2:>" size="40" maxlength="127" /><:ifRequired name2:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img name2:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Title:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_title "Title":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="title" value="<:last title:>" size="40" maxlength="127" tabindex="3" /><:ifRequired title:>*<:or:><:eif:>
+      <input type="text" name="title" value="<:old title user title:>" size="40" maxlength="127" /><:ifRequired title:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img title:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Organisation:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_organization "Organisation":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="organization" value="<:last organization:>" size="40" maxlength="127" tabindex="4" /><:ifRequired organization:>*<:or:><:eif:>
+      <input type="text" name="organization" value="<:old organization user organization:>" size="40" maxlength="127" /><:ifRequired organization:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img organization:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Address:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_street "Address":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="address" value="<:last address:>" size="40" maxlength="127" tabindex="5" /><:ifRequired address:>*<:or:><:eif:>
+      <input type="text" name="street" value="<:old street user street:>" size="40" maxlength="127" /><:ifRequired street:>*<:or:><:eif:>
     </td>
-    <td nowrap="nowrap"><:error_img address:></td>
+    <td nowrap="nowrap"><:error_img street:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Address 2:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_street2 "Address 2":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="delivStreet2" value="<:last delivStreet2:>" size="40" maxlength="127" tabindex="5" /><:ifRequired delivStreet2:>*<:or:><:eif:>
+      <input type="text" name="street2" value="<:old street2 user street2:>" size="40" maxlength="127" /><:ifRequired street2:>*<:or:><:eif:>
     </td>
-    <td nowrap="nowrap"><:error_img delivStreet2:></td>
+    <td nowrap="nowrap"><:error_img street2:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Suburb:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_suburb "Suburb":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="city" value="<:last city:>" size="40" maxlength="127" tabindex="6" /><:ifRequired city:>*<:or:><:eif:>
+      <input type="text" name="suburb" value="<:old suburb user suburb:>" size="40" maxlength="127" /><:ifRequired suburb:>*<:or:><:eif:>
     </td>
-    <td nowrap="nowrap"><:error_img city:></td>
+    <td nowrap="nowrap"><:error_img suburb:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">State:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_state "State":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="state" value="<:last state:>" size="8" maxlength="40" tabindex="7" /><:ifRequired state:>*<:or:><:eif:>
+      <input type="text" name="state" value="<:old state user state:>" size="8" maxlength="40" /><:ifRequired state:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img state:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Postcode:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_postcode "Postcode":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="postcode" value="<:last postcode:>" size="8" maxlength="40" tabindex="8" /><:ifRequired postcode:>*<:or:><:eif:>
+      <input type="text" name="postcode" value="<:old postcode user postcode:>" size="8" maxlength="40" /><:ifRequired postcode:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img postcode:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Country:</th>
-    <td width="100%" nowrap="nowrap">
-      <input type="text" name="country" value="<:last country:>" size="32" maxlength="127" tabindex="9" /><:ifRequired country:>*<:or:><:eif:>
-    </td>
-    <td nowrap="nowrap"><:error_img country:></td>
+    <th><label for="country"><:cfg "site users" display_country "Country":></label>:</th>
+    <td><:if Cfgsection "country selector":>
+      <select name="country" id="country">
+        <option value="">Please select a country</option>
+        <:iterator begin dyncfgsection "country selector" sort=key:>
+        <option value="<:uc [dyncfgentry key]:>"<:if Eq [old country user country] [uc [dyncfgentry key]]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+        <:iterator end dyncfgsection:>
+      </select><:or Cfgsection:>
+      <input type="text" name="country" id="country" size="20" value="<:old country user country:>" /><:eif Cfgsection:> *</td>
+    <td><:error_img country:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Telephone:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_telephone "Telephone":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="telephone" value="<:last telephone:>" size="32" maxlength="80" tabindex="10" /><:ifRequired telephone:>*<:or:><:eif:>
+      <input type="text" name="telephone" value="<:old telephone user telephone:>" size="32" maxlength="80" /><:ifRequired telephone:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img telephone:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Facsimile:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_facsimile "Facsimile":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="facsimile" value="<:last facsimile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired facsimile:>*<:or:><:eif:>
+      <input type="text" name="facsimile" value="<:old facsimile user facsimile:>" size="32" maxlength="80" /><:ifRequired facsimile:>*<:or:><:eif:>
     </td>
     <td nowrap="nowrap"><:error_img facsimile:></td>
   </tr>
   <tr>
-    <th nowrap="nowrap" align="left">Mobile:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_mobile "Mobile":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="delivMobile" value="<:last delivMobile:>" size="32" maxlength="80" tabindex="11" /><:ifRequired delivMobile:>*<:or:><:eif:>
+      <input type="text" name="mobile" value="<:old mobile user mobile:>" size="32" maxlength="80" /><:ifRequired mobile:>*<:or:><:eif:>
     </td>
-    <td nowrap="nowrap"><:error_img delivMobile:></td>
+    <td nowrap="nowrap"><:error_img mobile:></td>
   </tr>
   <tr> 
-    <th nowrap="nowrap" align="left">Email:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_email "Email":>:</th>
     <td width="100%" nowrap="nowrap"> 
-      <input type="text" name="email" value="<:last email:>" size="32" maxlength="255" tabindex="12" />*</td>
+      <input type="text" name="email" value="<:old email user email:>" size="32" maxlength="255" />*</td>
     <td nowrap="nowrap"><:error_img email:></td>
   </tr>
 <:if Cfg "site users" nopassword:>
   <tr>
-    <th nowrap="nowrap" align="left">Confirm Email:</th>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_confirm_email "Confirm Email":>:</th>
     <td width="100%" nowrap="nowrap">
-      <input type="text" name="confirmemail" value="<:old confirmemail:>" size="32" maxlength="255" tabindex="13" />
+      <input type="text" name="confirmemail" value="<:old confirmemail:>" size="32" maxlength="255" />
     </td>
     <td nowrap="nowrap"><:error_img confirmemail:></td>
   </tr>
@@ -127,5 +132,5 @@
     <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
   </tr>
 </table>
-<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" tabindex="100" /></p>
+<p align="right"><input type="submit" name="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" /></p>
 </form>

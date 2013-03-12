@@ -1,0 +1,128 @@
+<:wrap user/userbase.tmpl subtitle=>"Shipping details" :><:if Partial_logon:><:or Partial_logon:>
+<:include include/usernav.tmpl:><:eif Partial_logon:>
+<table border="0" cellpadding="5" cellspacing="1">
+  <tr>
+    <td><img src="/images/<:cfg theme name:>user/card.gif" width="32" height="32" border="0" alt="Your Shipping Details" /></td>
+    <td width="100%">
+      <h2><:param subtitle |h:></h2>
+    </td>
+  </tr>
+</table><:if Partial_logon:>
+<p>When your account was created, not all of the required details were entered.  Please provide at least the fields marked as required to complete your account activation.</p><:or Partial_logon:>
+<:include include/usermessage.tmpl:><:eif Partial_logon:>
+<form action="<:target user:>" method="post">
+<:if Cfg "site users" nopassword:>
+<input type="hidden" name="u" id="u" value="<:user id:>" />
+<input type="hidden" name="p" id="p" value="<:user password:>" />
+<input type="hidden" name="r" id="r" value="<:script:>?userpage=<:user password:>&amp;u=<:user id:>&amp;message=User+shipping+details+saved+successfully" />
+<:or Cfg:><:if Cgi r:><input type="hidden" name="r" id="r" value="<:cgi r:>"><:or Cgi:><input type="hidden" name="r" id="r" value="<:script:>?userpage=1&amp;message=User+shipping+details+saved+successfully" /><:eif Cgi:><:eif Cfg:>
+<input type="hidden" name="_t" id="_t" value="deliving" />
+<table border="0" cellpadding="1" cellspacing="1">
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_name1 "First Name":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivFirstName" id="delivFirstName" value="<:old delivFirstName user delivFirstName:>" size="40" maxlength="127" /> <:ifRequired delivFirstName:>*<:or:><:eif:></td>
+    <td nowrap="nowrap"><:error_img delivFirstName:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_name2 "Last Name":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivLastName" id="delivLastName" value="<:old delivLastName user delivLastName:>" size="40" maxlength="127" /> <:ifRequired delivLastName:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivLastName:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_title "Title":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivTitle" id="delivTitle" value="<:old delivTitle user delivTitle:>" size="40" maxlength="127" /> <:ifRequired delivTitle:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivTitle:></td>
+  </tr>
+  <tr>
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_organization "Organisation":>:</th>
+    <td width="100%" nowrap="nowrap">
+      <input type="text" name="delivOrganization" id="delivOrganization" value="<:old delivOrganization user delivOrganization:>" size="40" maxlength="127" /><:ifRequired delivOrganization:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivOrganization:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_street "Address":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivStreet" id="delivStreet" value="<:old delivStreet user delivStreet:>" size="40" maxlength="127" /> <:ifRequired delivStreet:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivStreet:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_street2 "Address 2":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivStreet2" id="delivStreet2" value="<:old delivStreet2 user delivStreet2:>" size="40" maxlength="127" /> <:ifRequired delivStreet2:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivStreet2:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_suburb "Suburb":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivSuburb" id="delivSuburb" value="<:old delivSuburb user delivSuburb:>" size="40" maxlength="127" /> <:ifRequired delivSuburb:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivSuburb:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_state "State":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivState" id="delivState" value="<:old delivState user delivState:>" size="8" maxlength="40" /> <:ifRequired delivState:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"> <:error_img delivState:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_postcode "Postcode":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivPostCode" id="delivPostCode" value="<:old delivPostCode user delivPostCode:>" size="8" maxlength="40" /> <:ifRequired delivPostCode:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"> <:error_img delivPostCode:></td>
+  </tr>
+  <tr>
+    <th><label for="delivCountry"><:cfg "site users" display_country "Country":></label>:</th>
+    <td><:if Cfgsection "country selector":>
+      <select name="delivCountry" id="delivCountry">
+        <option value="">Please select a country</option>
+        <:iterator begin dyncfgsection "country selector" sort=key:>
+        <option value="<:uc [dyncfgentry key]:>"<:if Eq [old delivCountry user deliveCountry] [uc [dyncfgentry key]]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+        <:iterator end dyncfgsection:>
+      </select><:or Cfgsection:>
+      <input type="text" name="delivCountry" id="delivCountry" size="20" value="<:old delivCountry user delivCountry:>" /><:eif Cfgsection:> *</td>
+    <td><:error_img delivCountry:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_telephone "Telephone":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivTelephone" id="delivTelephone" value="<:old delivTelephone user delivTelephone:>" size="32" maxlength="80" /> <:ifRequired delivTelephone:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivTelephone:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_facsimile "Facsimile":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivFacsimile" id="delivFacsimile" value="<:old delivFacsimile user delivFacsimile:>" size="32" maxlength="80" /> <:ifRequired delivFacsimile:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivFacsimile:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_mobile "Mobile":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivMobile" id="delivMobile" value="<:old delivMobile user delivMobile:>" size="32" maxlength="80" /> <:ifRequired delivMobile:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivMobile:></td>
+  </tr>
+  <tr> 
+    <th nowrap="nowrap" align="left"><:cfg "site users" display_email "Email":>:</th>
+    <td width="100%" nowrap="nowrap"> 
+      <input type="text" name="delivEmail" id="delivEmail" value="<:old delivEmail user delivEmail:>" size="32" maxlength="80" /> <:ifRequired delivEmail:>*<:or:><:eif:>
+    </td>
+    <td nowrap="nowrap"><:error_img delivEmail:></td>
+  </tr>
+  <tr> 
+    <td height="20" colspan="3" align="left" valign="bottom" nowrap="nowrap">* indicates required fields</td>
+  </tr>
+</table>
+<p align="right"><input type="submit" name="saveopts" id="saveopts" value="Save changes" class="user-buttons" accesskey="s" title="AccessKey = s" /></p>
+</form>
