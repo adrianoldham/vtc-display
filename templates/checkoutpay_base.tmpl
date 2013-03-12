@@ -108,7 +108,10 @@
         </tr>
         <tr>
           <th>BSB:</th><td><:cfg shop bsb:></td>
-        </tr>
+        </tr><:ifCfg shop swiftcode:>
+        <tr>
+          <th>SWIFT Code:</th><td><:cfg shop swiftcode |h:></td>
+        </tr><:or:><:eif:>
         <tr>
           <th>Account:</th><td><:cfg shop accountno:></td>
         </tr>
