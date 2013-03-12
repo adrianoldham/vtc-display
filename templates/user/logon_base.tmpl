@@ -1,4 +1,4 @@
-<:wrap user/pubbase.tmpl title=>"User Services" :>
+<:wrap user/pubbase.tmpl subtitle=>"Account Login" :>
 <:include include/usermessage.tmpl:>
 <form action="<:cfg site secureurl:><:script:>" method="post">
   <table width="350" align="center">
@@ -7,7 +7,7 @@
         <table width="100%" border="0" cellpadding="0" cellspacing="0">
           <tr>
             <td nowrap="nowrap"><img src="/images/basic/user/lock.gif" width="32" height="32" border="0" alt="User logon" />&nbsp;&nbsp;</td>
-            <td width="100%"><h2>User Logon</h2></td>
+            <td width="100%"><h2><:param subtitle |h:></h2></td>
           </tr>
         </table>
       </td>
