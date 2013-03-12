@@ -1,22 +1,22 @@
 <:uc [cfg site name]:> ACCOUNT SERVICES.
 
-Hello <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
+Hi <:ifUser name1:><:user name1:><:or:><:user userId:><:eif:>,
 
-You have registered a new account on our web site.
+Thanks for registering a new account on our web site.
+
+You can maintain your account details, such as password, email address, etc, 
+simply login using the following account details.
 
 ACCOUNT LOGON DETAILS:
 
   Username: <:user userId:>
-  Password: <:user password:>
 
 ACCOUNT LOGON LINK:
   <:target user:>
 
-To modify your account details, such as password, email address, etc, simply 
-open the above link in your web browser and logon.<:ifCfg subscriptions from:>
-
-Any questions should be directed to: <:cfg subscriptions from:><:or:><:eif:>
 
 Regards
 The team at <:cfg site name:>
 (<:cfg site url:>)
+
+<:set_subject "Welcome to your new account":>
