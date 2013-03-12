@@ -1,0 +1,52 @@
+<:wrap user/pubbase.tmpl subtitle=>"Change Password" :>
+<form action="<:target user:>" method="post"><:if Cgi r:>
+  <input type="hidden" name="r" value="<:cgi r:>" /><:or Cgi:><:eif Cgi:>
+  <input type="hidden" name="id" value="<:lostid:>" />
+  <table width="350">
+    <tr>
+      <td colspan="2">
+        <table width="100%" border="0" cellpadding="0" cellspacing="0">
+          <tr>
+            <td nowrap="nowrap"><img src="/images/basic/user/lock.gif" width="32" height="32" border="0" alt="Change Password" />&nbsp;&nbsp;</td>
+            <td width="100%"><h2><:param subtitle |h:></h2></td>
+          </tr>
+        </table>
+      </td>
+    </tr><:if User:> 
+    <tr> 
+      <td colspan="2">You are already logged in as <a href="<:target user:>"><:user userId:></a>, if this is not you, please <a href="<:target user logoff:>">logout now</a>.</p></td>
+    </tr><:or User:><:eif User:>
+    <tr> 
+      <th align="left" nowrap="nowrap"><:cfg "site users" display_new_password "New Password":>:</th>
+      <td> 
+       <input type="password" name="password" value="<:old password:>" size="40" />
+     </td>
+     <td nowrap="nowrap"><:error_img password:></td>
+   </tr>
+    <tr> 
+      <th align="left" nowrap="nowrap"><:cfg "site users" display_confirm_password "Confirm Password":>:</th>
+      <td> 
+       <input type="password" name="confirm" value="<:old confirm:>" size="40" />
+     </td>
+     <td nowrap="nowrap"><:error_img confirm:></td>
+   </tr>
+   <tr> 
+     <td>&nbsp; </td>
+     <td align="right">
+       <input type="submit" name="a_lost_save" value="Save changes" accesskey="s" title="AccessKey = s" />
+     </td>
+   </tr>
+   <tr> 
+     <td colspan="2" align="right"> 
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <tr> 
+           <td align="left" nowrap="nowrap"><br />
+            <a href="<:target user show_logon:>">Found your password?</a></td>
+          <:if Cfg "site users" user_register 1:><td align="right" nowrap="nowrap"><br />
+            <a href="<:dyntarget user show_register r [cgi r] :>">Need an account?</a></td><:or Cfg:><:eif Cfg:>
+        </tr>
+      </table>
+    </td>
+  </tr>
+</table>
+</form>
