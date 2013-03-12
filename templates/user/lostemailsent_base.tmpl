@@ -13,18 +13,18 @@
 <:if Cfg "site users" nopassword:>
     <tr> 
       <td>
-        Your options link has been emailed to <b><:user email:></b>.
+        Your account access link has been emailed to <b><:user email:></b>.
       </td>
     </tr>
 <:or Cfg:>
     <tr> 
       <td>
-        Your password has been emailed to <b><:user email:></b>.
+        Your password reset link has been emailed to <b><:user email:></b>.
       </td>
     </tr>
     <tr> 
       <td> <br />
-        <a href="<:script:>?userpage=<:ifCfg "site users" nopassword:><:user password:>&amp;u=<:user id:><:or:>1<:eif:>">User account manager</a>
+        <a href="<:target user userpage:>">Ready to login?</a>
       </td>
     </tr>
 <:eif Cfg:>
