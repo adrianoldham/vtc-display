@@ -1,23 +1,21 @@
 <:wrap shopbase.tmpl title=>"Shop Checkout" :>
 <table class="items">
-  <caption>Order items</caption>
+  <caption>Selected Order Items</caption>
   <thead>
-    <tr>
-      <th class="item">Item</th>
-      <th class="quantity">Qty</th>
-      <th class="price">Price</th>
-      <th class="extended">Extended</th>
+    <tr> 
+      <th class="col1">Item:</th>
+      <th class="col2">Qty:</th>
+      <th class="col3">Price:</th>
     </tr>
   </thead>
   <tbody><:iterator begin items:>
-    <tr>
-      <td class="item">
+    <tr class="item"> 
+      <td class="col1">
         <a href="<:item link:>" class="title"><:item title:></a> <:options:><:if Cfg tryandbyte aufreight:><:if Overseas:><:or Overseas:><:ifFreeShipProduct item:> - (free shipping)<:or:><:eif:><:eif Overseas:><:or Cfg:><:eif Cfg:><:if And [item description] [cfg shop product_description 1]:>
-        <div class="description"><:item description:></div><:or And:><:eif And:>
+        <div class="i_description"><:item description:></div><:or And:><:eif And:>
       </td>
-      <td class="quantity"><:item units:> &times;</td>
-      <td class="price"><:cfg shop currency "$":><:number money [item price]:></td>
-      <td class="extended"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
+      <td class="col2"><:item units:> &times;</td>
+      <td class="col3"><:cfg shop currency "$":><:money item retailPrice:></td>
     </tr><:iterator end items:>
   </tbody>
 </table>
@@ -38,126 +36,96 @@
 </p><:or User:>
 <p class="alert">To track the status of your purchase you must <:if Or [cfg "site users" user_register]:>either <a href="<:dyntarget user show_register r [dyntarget shop order] :>">Signup</a> or <:or Or:><:eif Or:><a href="<:dyntarget user show_logon r [dyntarget shop order] :>">Logon</a> before you continue with this purchase.
 </p><:eif User:><:eif Cfg:>
-<form action="<:target shop:>" method="post" name="checkoutpay">
+<form action="<:dyntarget shop:>" method="post">
 <:ifOrder id:><input type="hidden" name="order_id" value="<:order id:>" /><:or:><:eif:>
-  <h2>Payment Details</h2>
+  <h2>Payment Details:</h2>
   <fieldset>
-    <:if Payments CC:>
-    <dl class="paymentType0">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType0" value="0" <:checkedPayment CC:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="0" /><:eif MultPaymentTypes:> <label for="paymentType0">Credit Card</label></dt>
-      <dd>
-        <table>
-          <caption>Account Details</caption>
-          <tr>
-            <th><label for="ccName"><:cfg shop display_ccName "Name on Card":>:</label></th>
-            <td><input type="text" name="ccName" id="ccName" size="40" value="<:old ccName:>" /></td>
-            <td><:error_img ccName:></td>
-          </tr>
-          <tr>
-            <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":>:</label></th>
-            <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" />
-              <label for="cardVerify"><:cfg shop display_cardVerify "CVV":>:</label> <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" /> <:help cvv2 CVV:>
-            </td>
-            <td><:error_img cardNumber:> <:error_img cardVerify:></td>
-          </tr>
-          <tr>
-            <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":>:</label></th>
-            <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(MM/YY)</span></td>
-            <td><:error_img cardExpiry:></td>
-          </tr>
-          <tr>
-            <th><label for="ccType"><:cfg shop display_ccType "Card Type":>:</label></th>
-            <td>
-              <select name="ccType" id="ccType">
-                <option value="" selected="selected">Select card type</option>
-                <:if Cfgsection "payment ccType":>
-                <:iterator begin dyncfgsection "payment ccType" sort=key:>
-                <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
-                <:iterator end dyncfgsection:>
-                <:or Cfgsection:>
-                <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
-                <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
-                <option value="American Express"<:ifEq [cgi ccType] "American Express":> selected="selected"<:or:><:eif:>>American Express</option>
-                <:eif Cfgsection:>
-              </select>
-            </td>
-            <td><:error_img ccType:></td>
-          </tr>
-        </table>
-      </dd>
-    </dl>
-    <:or Payments:><:eif Payments:>
-    <:if Payments PayPal:>
-    <dl class="paymentType4">
-      <dt class="paypal"><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedPayment PayPal:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="4" /><:eif MultPaymentTypes:> <label for="paymentType4">PayPal</label></dt>
-      <dd>
-        <p>You will be redirected to the PayPal checkout page, there you can pay using your PayPal account balance, credit card or your linked bank account.</p>
-        <p class="small">Your order will be processed when payment receipt is confirmed.</p>
-      </dd>
-    </dl>
-    <:or Payments:><:eif Payments:>
-    <:if Payments Cheque:>
-    <dl class="paymentType1">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedPayment Cheque:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
-      <dd>
-        <p>Please send a cheque to:</p> 
-        <address>
-          <b><:cfg shop address1 |h:></b><br />
-          <:cfg shop address2 |h:><br />
-          <:cfg shop address3 |h:><br />
-          <:cfg shop address4 |h:>
-        </address>
-        <p class="small">Your order will be processed when cheque has cleared.</p>
-      </dd>
-    </dl>
-    <:or Payments:><:eif Payments:>
+  <dl>
+    <:if CCPayments :>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType0" value="0" <:checkedIfFirstCC:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="0" /><:eif MultPaymentTypes:> <label for="paymentType0">Credit Card</label></dt>
+    <dd>
+      <table>
+        <caption>Credit Card Details</caption>
+        <tr>
+          <th><label for="ccName"><:cfg shop display_ccName "Name on Card":></label>:</th>
+          <td><input type="text" name="ccName" id="ccName" size="30" value="<:old ccName:>" /></td>
+          <td><:error_img cardHolder:></td>
+        </tr>
+        <tr>
+          <th><label for="cardNumber"><:cfg shop display_cardNumber "Card Number":></label>:</th>
+          <td><input type="text" name="cardNumber" id="cardNumber" size="16" maxlength="16" value="<:old cardNumber:>" />
+            <label for="cardVerify"><:cfg shop display_cardVerify "CVV":></label>: <input type="text" name="cardVerify" id="cardVerify" size="4" maxlength="4" value="<:old cardVerify:>" /> <:help cvv2 CVV:>
+          </td>
+          <td><:error_img cardNumber:> <:error_img cardVerify:></td>
+        </tr>
+        <tr>
+          <th><label for="cardExpiry"><:cfg shop display_cardExpiry "Expiry Date":></label>:</th>
+          <td><input type="text" name="cardExpiry" id="cardExpiry" size="5" maxlength="5" value="<:old cardExpiry:>" /> <span class="small">(MM/YY)</span></td>
+          <td><:error_img cardExpiry:></td>
+        </tr>
+        <tr>
+          <th><label for="ccType"><:cfg shop display_ccType "Card Type":></label>:</th>
+          <td>
+            <select name="ccType" id="ccType">
+              <option value="" selected="selected">Select card type</option>
+              <:if Cfgsection "payment ccType":>
+              <:iterator begin dyncfgsection "payment ccType" sort=key:>
+              <option value="<:dyncfgentry value:>"<:if Eq [old ccType] [dyncfgentry value]:> selected="selected"<:or Eq:><:eif Eq:>><:dyncfgentry value:></option>
+              <:iterator end dyncfgsection:>
+              <:or Cfgsection:>
+              <option value="Visa"<:ifEq [cgi ccType] "Visa":> selected="selected"<:or:><:eif:>>Visa</option>
+              <option value="Mastercard"<:ifEq [cgi ccType] "Mastercard":> selected="selected"<:or:><:eif:>>Mastercard</option>
+              <option value="American Express"<:ifEq [cgi ccType] "American Express":> selected="selected"<:or:><:eif:>>American Express</option>
+              <:eif Cfgsection:>
+            </select>
+          </td>
+          <td><:error_img cardType:></td>
+        </tr>
+      </table>
+    </dd>
+    <:or CCPayments:><:eif CCPayments:>
+    <:if ChequePayments:>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedIfFirstCheque:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
+    <dd>
+      <p>Please send a cheque to:</p> 
+      <address><b><:cfg shop address1 |h:></b><br />
+      <:cfg shop address2 |h:><br />
+      <:cfg shop address3 |h:><br />
+      <:cfg shop address4 |h:></address>
+    </dd>
+    <:or ChequePayments:><:eif ChequePayments:>
     <:if Payments DirectDeposit:>
-    <dl class="paymentType10">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="10" /><:eif MultPaymentTypes:> <label for="paymentType10">Deposit</label></dt>
-      <dd>
-        <p>Please transfer the funds to:</p>
-        <table>
-          <caption>Account Details</caption>
-          <tr>
-            <th>Name:</th>
-            <td><:cfg shop accountname |h:></td>
-          </tr>
-          <tr>
-            <th>BSB:</th>
-            <td><:cfg shop bsb |h:></td>
-          </tr><:ifCfg shop swiftcode:>
-          <tr>
-            <th>SWIFT Code:</th>
-            <td><:cfg shop swiftcode |h:></td>
-          </tr><:or:><:eif:>
-          <tr>
-            <th>Account:</th>
-            <td><:cfg shop accountno |h:></td>
-          </tr>
-          <tr>
-            <th>Reference:</th>
-            <td>&lt;Your order number&gt;</td>
-          </tr>
-        </table>
-        <p class="small">Your order will be processed when payment transfer is confirmed.</p>
-      </dd>
-    </dl>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="10" /><:eif MultPaymentTypes:> <label for="paymentType10">Electronic Fund Transfer</label></dt>
+    <dd>
+      <p>Please transfer the funds to:</p>
+      <table>
+        <caption>Electronic Fund Transfer Details</caption>
+        <tr>
+          <th>Name:</th><td><:cfg shop accountname:></td>
+        </tr>
+        <tr>
+          <th>BSB:</th><td><:cfg shop bsb:></td>
+        </tr>
+        <tr>
+          <th>Account:</th><td><:cfg shop accountno:></td>
+        </tr>
+        <tr>
+          <th>Reference:</th><td>&lt;Your order number&gt;</td>
+        </tr>
+      </table>
+    </dd>
     <:or Payments:><:eif Payments:>
-    <:if Payments CallMe:>
-    <dl class="paymentType2">
-      <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="<:paymentTypeId CallMe:>" <:checkedPayment CallMe:> />
-      <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="<:paymentTypeId CallMe:>" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact Me</label></dt>
-      <dd>We will contact you to make arrangements for payment.</dd>
-    </dl>
-    <:or Payments:><:eif Payments:>
-    <:if HaveSaleFiles:><:or HaveSaleFiles:><:eif HaveSaleFiles:>
+    <:if CallMePayments:>
+    <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="2" <:checkedIfFirstCallMe:> />
+    <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="2" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact me for billing details</label></dt>
+    <:or CallMePayments:><:eif CallMePayments:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
-  </fieldset><:if MultPaymentTypes:>
-  <p>Please select your preferred payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
+  </dl>
+  </fieldset>
+  <:if MultPaymentTypes:><p class="small">* Select an appropriate payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />

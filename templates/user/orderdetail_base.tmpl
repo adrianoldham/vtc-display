@@ -107,7 +107,8 @@ Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
     <td width="100%"><:order billStreet2:></td>
   </tr>
   <:or:><:eif:><tr> 
-    <td width="100%"><:order billSuburb:> <:order billState:> <:order billPostCode:>, <:order billCountry:></td>
+    <td width="100%"><:order billSuburb:> <:order billState:> <:order billPostCode:>,</br />
+    <:ifCfgsection "country selector":><:cfg "country selector" [order billCountry]:><:or:><:order billCountry:><:eif:></td>
   </tr>
   <tr> 
     <th align="left" class="th">Telephone:</th>
@@ -124,7 +125,7 @@ Purchase Order: <:order purchase_order:><:or:><:eif:></h2>
 <:or Order:><:eif Order:>  
   <tr> 
     <th align="left" class="th">Email:</th>
-    <td width="100%"><:order emailAddress:></td>
+    <td width="100%"><:order billEmail:></td>
   </tr>
   <:ifOrder instructions:><tr> 
     <th align="left" valign="top" class="th">Instructions:</th>

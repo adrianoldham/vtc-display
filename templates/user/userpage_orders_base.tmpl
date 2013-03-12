@@ -10,55 +10,74 @@
 </table>
 <:include include/usermessage.tmpl:>
 <div class="shop">
-<:if Cfg shop enabled:><:if Orders:>
+<:if Orders:>
 <table class="items orders">
-  <caption>Your Order History</caption>
+  <caption>Orders</caption><:if Orders:>
   <thead>
     <tr>
-      <th class="col1">Order No.:</th>
-      <th class="col2">Order Date:</th>
-      <th class="col3">Order Status:</th>
-      <th class="col4">Order Total:</th>
+      <th class="col1 item number">No.:</th>
+      <th class="col2 date">Date:</th>
+      <th class="col3 status">Status:</th>
+      <th class="col4 payment">Payment:</th>
+      <th class="col5 total">Total:</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin orders:><tr class="item">
-      <td class="col1">
-        <a href="<:script:>?a_orderdetail=1&amp;id=<:order id:>" onclick="return show_orderdetail(<:order id:>);" target="_blank"><:order id |%06d:></a>
+  <tbody><:iterator begin orders:>
+    <tr>
+      <td class="col1 item number">
+        <!--<a href="<:target user orderdetail id [order id] :>"><:order id |%06d:></a>//-->
+        <a href="<:target user userpage _t orders id [order id] :>#order_<:order id:>"><:order id |%06d:></a>
       </td>
-      <td class="col2"><:date order orderDate:></td>
-      <td class="col3"><:ifOrder filled:>Completed<:or:>Processing<:eif:></td>
-      <td class="col4"><:cfg shop currency "$":><:money order total:></td>
+      <td class="col2 date"><:date order orderDate:></td>
+      <td class="col3 status"><:dyncatmsg [order stage_description_id]:></td>
+      <td class="col4 payment"><span class="<:ifOrder paidFor:>paid<:or:>unpaid<:eif:>"><:ifOrder paidFor:>Paid<:or:>Unpaid<:eif:></span></td>
+      <td class="col5 total"><:cfg shop currency "$":><:number money [order total]:></td>
+    </tr><:iterator end orders:>
+  </tbody><:or Orders:>
+  <tbody>
+    <tr> 
+      <td colspan="4" class="noitems">You haven’t purchased anything</td>
     </tr>
-    <:iterator end orders:>
-  </tbody>
+  </tbody><:eif Orders:>
 </table>
-<:iterator begin orders:>
+
+<:iterator begin orders:><:switch:><:case Eq [cgi id] [order id]:>
+<!-- BY ORDER ID //-->
+<h2 id="order_<:order id:>">Order summary</h2>
 <table class="items">
-  <caption><a href="<:script:>?a_orderdetail=1&amp;id=<:order id:>" onclick="return show_orderdetail(<:order id:>);" target="_blank">Selected Order Items</a></caption>
+  <caption>Order <:order id |%06d:> items</caption>
   <thead>
     <tr> 
-      <th class="col1">Item:</th>
-      <th class="col2">Qty:</th>
-      <th class="col3">Price:</th>
+      <th class="col1 item">Item:</th>
+      <th class="col2 code">Code:</th>
+      <th class="col3 quantity">Qty:</th>
+      <th class="col4 price">Price:</th>
+      <th class="col5 extended">Extended:</th>
     </tr>
   </thead>
-  <tbody>
-    <:iterator begin items:><tr class="item"> 
-      <td class="col1"><:ifEq [item productId] -1:>
+  <tbody><:iterator begin items:>
+    <tr> 
+      <td class="col1 item"><:ifEq [item productId] -1:>
         <:item title:><:or:>
-        <a href="<:product link:>"><:item title:></a><:eif:> <:ifOptions:><:options:><:or:><:eif:> <:if And [item description] [cfg shop product_description 1]:>
-        <div class="i_description"><:item description:></div><:or And:><:eif And:>
-      </td>
-      <td class="col2"><:item units:> &times;</td>
-      <td class="col3"><:cfg shop currency "$":><:money item price:></td>
-    </tr>
-    <:iterator end items:>
+        <a href="<:url product:>"><:item title:></a><:eif:> <:ifOptions:><span><:options:></span><:or:><:eif:><:if And [item description] [cfg shop product_description 1]:>
+        <div class="description"><:item description:></div><:or And:><:eif And:></td>
+      <td class="col2 code"><:item product_code:></td>
+      <td class="col3 quantity"><:item units:> &times;</td>
+      <td class="col4 price"><:cfg shop currency "$":><:number money [item price]:></td>
+      <td class="col5 extended"><:cfg shop currency "$":><:number money [arithmetic [item units] * [item price]]:></td>
+    </tr><:iterator end items:>
   </tbody>
 </table>
-<div class="totals"><:if Or [cfg freight enabled] [cfg tryandbyte aufreight]:><:if Order shipping_cost:><p class="freight"><span>Freight:</span> <:ifOrder customInt1:>To be quoted<:or:><:cfg shop currency "$":><:money order shipping_cost:><:eif:></p><:or Order:><:eif Order:><:or Or:><:eif Or:>
-<p class="total"><span>Total:</span> <:cfg shop currency "$":><:money order total:></p></div>
-<:if Orderfiles:>
+<div class="totals">
+  <:switch:>
+  <:case Order shipping_cost:>
+  <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> <:cfg shop currency "$":><:number money [order shipping_cost]:></p>
+  <:case Match [order shipping_name] ^contact$:>
+  <p class="freight"><span>(<:order shipping_method:>)</span> <label>Freight:</label> TBA</p>
+  <:case default:>
+  <:endswitch:>
+  <p class="total"><abbr><:cfg shop currency_code "AUD":></abbr> <label>Total:</label> <:cfg shop currency "$":><:number money [order total]:></p>
+</div><:if Orderfiles:>
 <table class="items">
   <tr> 
     <th colspan="4"><:if Order filled:>Files available<:or Order:><:ifCfg downloads must_be_filled:>Files available when order status is &quot;Complete&quot;<:or:>Files<:eif:><:eif Order:></th>
@@ -78,20 +97,8 @@
 <:iterator end orderfiles:> 
 </table>
 <:or Orderfiles:><:eif Orderfiles:>
-<:iterator separator orders:>
+<:endswitch:>
 <:iterator end orders:><:or Orders:>
-<p class="noitems">You haven't made any orders yet.</p>
+<p class="noitems">You haven’t purchased anything</p>
 <:eif Orders:>
-<:or Cfg:>
-<:eif Cfg:>
 </div>
-<script type="text/javascript" language="javascript">
-//<![CDATA[
-function show_orderdetail(orderid,template) {
-  window.open('<:script:>?a_orderdetail=1&amp;id='+orderid+'&amp;_t='+template, 
-              'orderdetail', 
-              'width=500,height=600,location=no,status=no,menubar=no,scrollbars=yes');
-  return false;
-}
-//]]>
-</script>

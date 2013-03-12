@@ -31,7 +31,8 @@
 <div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p></div><:or Total:><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
-  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:or Total:>
+  <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:ifCfg shop emptycart:>
+  <input type="submit" name="a_emptycart" value="Empty cart" accesskey="e" title="AccessKey = e" /><:or:><:eif:><:or Total:>
   <input type="submit" name="a_order" value="Checkout now" accesskey="c" title="AccessKey = c" /><:eif Total:>
 </p><:if Total:><:or Total:>
 <input type="hidden" name="delivFirstName" id="delivFirstName" value="<:user name1:>" /> 
