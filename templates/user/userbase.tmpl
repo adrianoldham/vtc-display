@@ -1,4 +1,4 @@
-<:wrap base.tmpl:>
+<:wrap base.tmpl title=>[cond [param title] [param title |h] [cfg "site users" userbase_title "Your Account"]] :>
 <div id="user" class="article user">
 <h1 class="pagetitle"><:param title |h:></h1><:switch:><:case Param nomessage:>
 <:case Match [script] "aza":><:ifMsg:><p id="message" class="error"><:msg:></p><:or:><:eif:>
