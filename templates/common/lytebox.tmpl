@@ -12,7 +12,7 @@
   </tr>
   <tr><:or Arithmetic:><:eif Arithmetic:>
     <td<:ifArithmetic [image_index] && [image_number] % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>>
-      <a href="<:target thumb:>?g=gallery_full&amp;page=<:article id:>&amp;image=<:image - id:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
+      <a href="<:target thumb:>?g=gallery_full&amp;page=<:article id:>&amp;image=<:image - id:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery - :></a><:if And [cfg popimage caption 0] [image - alt]:>
       <p><:image - alt:></p><:or And:><:eif And:>
     </td><:iterator separator images:><:iterator end images:><:if Cfg popimage colspan 1:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:>
     <td class="row_end" colspan="<:arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]) :>">&nbsp;</td><:or Arithmetic:><:eif Arithmetic:><:or Cfg:><:if Arithmetic [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3]:><:iterator begin strepeats [arithmetic [cfg popimage cols 3] - ( [ifImages named /(?<!_hide)$/ ] % [cfg popimage cols 3] )]:>
@@ -21,7 +21,7 @@
 </table><:case default:>
 <ul class="gallery"><:iterator begin images named /(?<!_hide)$/ :>
   <li<:ifArithmetic [image_index] && [image_number] % [cfg popimage cols 3] == 0:> class="row_end"<:or:><:eif:>>
-    <a href="<:thumbimage gallery_full - image:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery -:></a><:if And [cfg popimage caption 0] [image - alt]:>
+    <a href="<:thumbimage gallery_full - image:>" rel="lytebox[group_<:article id:>]" <:ifEq [image - alt] "":><:or:>title="<:image - alt:>" <:eif:>target="bse_image"><:thumbimage gallery - :></a><:if And [cfg popimage caption 0] [image - alt]:>
     <p><:image - alt:></p><:or And:><:eif And:>
   </li><:iterator separator images:><:iterator end images:>
 </ul><:endswitch:><:or Images:><:eif Images:><:switch:><:case And [ifAllkids] [ifUnderThreshold allkids]:><:include include/sortallkids.tmpl:><:iterator begin allkids:>
