@@ -208,10 +208,8 @@
   </table>
   <p class="small">* Only required if different to shipping address</p>
   <:or NeedDelivery:><:eif NeedDelivery:>
-  <:or Cgi:>
-  <p><input type="checkbox" name="need_delivery" id="need_delivery" onclick="this.form.checkupdate.click()" />
+  <p><input type="checkbox" name="need_delivery" id="need_delivery" onclick="this.form.checkupdate.click()"<:ifNeedDelivery:> checked="checked"<:eif:> />
     <label for="need_delivery">Shipping details different to billing</label></p>
-  <:eif Cgi:>
   <:if Cfg affiliate enabled:><h2>Referrer Details:</h2>
   <table border="0" cellspacing="0" cellpadding="0">
     <tr>
