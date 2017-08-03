@@ -20,7 +20,7 @@
       <td class="col2">
         <:if Match [item generator] "Seminar":><input type="hidden" name="quantity_<:index:>" value="<:item units:>" /><:ifTotal:><:item units:><:or:><:eif:><:or Match:><input type="text" name="quantity_<:index:>" size="2" value="<:item units:>" /><:eif Match:>
       </td>
-      <td class="col3"><:if Item price:><:cfg shop currency "$":><:<:number money [item price]:>:><:or Item:><:eif Item:></td>
+      <td class="col3"><:if Item price:><:cfg shop currency "$":><:number money [item price]:><:or Item:><:eif Item:></td>
       <td class="col4"><input type="image" name="delete_<:index:>" id="delete_<:index:>" src="/images/basic/store/buttons/delete.gif" title="Remove this item" /></td>
     </tr><:iterator end items:><:or Count:>
     <tr> 
@@ -28,7 +28,7 @@
     </tr><:eif Count:>
   </tbody>
 </table><:if Count:><:if Total:>
-<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money total:></p></div><:or Total:><:eif Total:>
+<div class="totals"><p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:number money [total]:></p></div><:or Total:><:eif Total:>
 <p class="buttons">
   <:if Total:><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" />
   <input type="submit" name="recalc" value="Update" accesskey="u" title="AccessKey = u" /><:ifCfg shop emptycart:>
