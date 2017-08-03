@@ -13,11 +13,11 @@
       <:iterator begin dyncart:><tr id="cart_item_<:dyncartitem id:>">
         <td class="col1"><a href="<:dyncartitem link:>" title="<:dyncartitem title:>"><:dynreplace [dyncartitem title] "((?:&[^;]*;|[^&]){16}).*" $1...:></a></td>
         <td class="col2"><:dyncartitem units:> &times;</td>
-        <td class="col3"><:cfg shop currency "$":><:money dyncartitem retailPrice:></td>
+        <td class="col3"><:cfg shop currency "$":><:number money [dyncartitem retailPrice]:></td>
       </tr><:iterator separator dyncart:>
       <:iterator end dyncart:>
     </tbody>
   </table>
-  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:money dyncarttotalcost:></p><:if Dyncarttotalcost:>
+  <p class="total"><span>Sub total:</span> <:cfg shop currency "$":><:number money [dyncarttotalcost]:></p><:if Dyncarttotalcost:>
   <form action="<:dyntarget shop:>" method="post"><p><input type="submit" name="checkout" value="Checkout now" accesskey="c" title="AccessKey = c" /> <input type="submit" name="cart" value="View <:cfg shop cart_name cart:>" accesskey="v" title="AccessKey = v" /></p></form><:or Dyncarttotalcost:><:eif Dyncarttotalcost:>
 </div><:or Dyncart:><:eif Dyncart:>

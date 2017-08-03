@@ -13,7 +13,7 @@
 <input type="hidden" name="quantity" value="1" />
 <p class="duration"><span>Duration:</span> <:seminar duration:> minutes</p><:ifSeminar customInt1:>
 <p class="points"><span>CME Points:</span> <:seminar customInt1:></p><:or:><:eif:>
-<p class="price"><:ifSeminar retailPrice:><span>Price:</span> <strong><:cfg shop currency "$":><:money product retailPrice:></strong> (inc GST)<:or:><strong>FREE Seminar</strong><:eif:></p>
+<p class="price"><:ifSeminar retailPrice:><span>Price:</span> <strong><:cfg shop currency "$":><:number money [product retailPrice]:></strong> (inc GST)<:or:><strong>FREE Seminar</strong><:eif:></p>
 <div class="sessions">
 <h2>Sessions</h2>              
 <:if Cfg seminar locations:><:iterator begin locations:><p><b><a href="<:target shop:>?a_location=1&amp;location_id=<:location id:>" onclick="return show_location(<:location id:>)"><:location description:></a></b></p>

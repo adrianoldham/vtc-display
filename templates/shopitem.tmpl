@@ -17,7 +17,7 @@
   </table><:or Options:><:eif Options:><:ifProduct leadTime:> 
   <p class="leadTime"><label>Usually ships in:</label> <:product leadTime:> <:if Eq [product leadTime] "1":>day<:or Eq:>days<:eif Eq:></p><:or:><:eif:><:ifProduct product_code:>
   <p class="pcode"><label>Product Code:</label> <:product product_code:></p><:or:><:eif:>
-  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:money product retailPrice:></span> (inc GST)</p>
+  <p class="price"><label>Price:</label> <span><:cfg shop currency "$":><:number money [product retailPrice]:></span> (inc GST)</p>
   <p class="buy"><:ifProduct listed:>
     <label for="qty<:article id:>">Qty:</label> <input type="text" id="qty<:article id:>" name="quantity" value="1" size="2" />
     <input type="submit" id="add<:article id:>" name="add" value="Add to <:cfg shop cart_name cart:>" accesskey="a" title="AccessKey = a" class="shop_addshopitem" />
