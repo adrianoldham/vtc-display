@@ -84,7 +84,23 @@
         </tr>
       </table>
     </dd>
-    <:or CCPayments:><:eif CCPayments:>
+    <:eif CCPayments:>
+    <:- if Payments PayPal:>
+    <dl class="paymentType4">
+      <dt class="paypal">
+        <:- if MultPaymentTypes:>
+        <input type="radio" name="paymentType" id="paymentType4" value="4" <:checkedPayment PayPal:> />
+        <:- or MultPaymentTypes:>
+        <input type="hidden" name="paymentType" value="4" />
+        <:- eif MultPaymentTypes:>
+        <label for="paymentType4">PayPal</label>
+      </dt>
+      <dd>
+        <p>You will be redirected to the PayPal checkout page, there you can pay using your PayPal account balance, credit card or your linked bank account.</p>
+        <p class="small">Your order will be processed when payment receipt is confirmed.</p>
+      </dd>
+    </dl>
+    <:- eif Payments:>
     <:if ChequePayments:>
     <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType1" value="1" <:checkedIfFirstCheque:> />
     <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="1" /><:eif MultPaymentTypes:> <label for="paymentType1">Cheque</label></dt>
@@ -95,7 +111,7 @@
       <:cfg shop address3 |h:><br />
       <:cfg shop address4 |h:></address>
     </dd>
-    <:or ChequePayments:><:eif ChequePayments:>
+    <:eif ChequePayments:>
     <:if Payments DirectDeposit:>
     <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType10" value="10" <:checkedPayment DirectDeposit:> />
     <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="10" /><:eif MultPaymentTypes:> <label for="paymentType10">Electronic Fund Transfer</label></dt>
@@ -120,15 +136,15 @@
         </tr>
       </table>
     </dd>
-    <:or Payments:><:eif Payments:>
+    <:eif Payments:>
     <:if CallMePayments:>
     <dt><:if MultPaymentTypes:><input type="radio" name="paymentType" id="paymentType2" value="2" <:checkedIfFirstCallMe:> />
     <:or MultPaymentTypes:><input type="hidden" name="paymentType" value="2" /><:eif MultPaymentTypes:> <label for="paymentType2">Contact me for billing details</label></dt>
-    <:or CallMePayments:><:eif CallMePayments:>
+    <:eif CallMePayments:>
     <:include include/custom/payment_type_checkout.tmpl optional:><:include include/payment_type_checkout.tmpl optional:>
   </dl>
   </fieldset>
-  <:if MultPaymentTypes:><p class="small">* Select an appropriate payment method</p><:or MultPaymentTypes:><:eif MultPaymentTypes:>
+  <:if MultPaymentTypes:><p class="small">* Select an appropriate payment method</p><:eif MultPaymentTypes:>
   <p class="buttons">
     <input type="submit" value="Purchase now" name="payment" accesskey="p" title="AccessKey = p" />
     <input type="submit" value="Go back" name="checkout" accesskey="b" title="AccessKey = b" />

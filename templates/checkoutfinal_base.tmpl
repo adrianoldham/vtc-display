@@ -23,7 +23,21 @@
     </table>
   </dd>
 </dl>
-<:or CCPayment:><:eif CCPayment:>
+<:eif CCPayment:>
+<:if Payments PayPal:>
+<dl>
+  <dt>>Your payment was processed through PayPal:</dt>
+  <dd>
+    <table>
+      <caption>PayPal Details</caption>
+      <tr>
+        <th>Transaction Id:</th>
+        <td><:order paypal_tran_id:></td>
+      </tr>
+    </table>
+  </dd>
+</dl>
+<:eif Payments:>
 <:if ChequePayment:>
 <dl>
   <dt>Please send a cheque to:</dt>
@@ -36,7 +50,7 @@
     </address>
   </dd>
 </dl>
-<:or ChequePayment:><:eif ChequePayment:>
+<:eif ChequePayment:>
 <:if Payment DirectDeposit:>
 <dl>
   <dt>Please transfer the funds to:</dt>
@@ -61,10 +75,10 @@
     </table>
   </dd>
 </dl>
-<:or Payment:><:eif Payment:>
+<:eif Payment:>
 <:if CallMePayment:>
 <p>We will contact you to make arrangements for payment.</p>
-<:or CallMePayment:><:eif CallMePayment:>
+<:eif CallMePayment:>
 <:include include/custom/payment_type_checkoutfinal.tmpl optional:>
 <table class="items">
   <caption>Order Items</caption>
